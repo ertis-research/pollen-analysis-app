@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Add new pollinic range</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>Add a date range</h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Inclusive - Inclusive</mat-label>
+        <mat-date-range-input [dateFilter]="myFilter" [rangePicker]="picker" [formGroup]="dateRange" disabled>
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker touchUi #picker disabled="false"></mat-date-range-picker>
+    </mat-form-field>
+    <h3>Add pollinic percentages</h3>
+    <h5>No decimals allowed | Sum must be 100</h5>
+
+    <mat-form-field class="chipsSelector">
+        <mat-label>Select the different pollen types</mat-label>
+        <mat-select [formControl]="polenListControl" multiple>
+            <mat-select-trigger>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let polen of polenListControl.value" [removable]="true"
+                        (removed)="onPolenRemoved(polen)" >
+                        {{ polen.Polen_Type_Name }}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-select-trigger>
+            <mat-option *ngFor="let polen of polenList" [value]="polen">{{polen.Polen_Type_Name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <span *ngFor="let polen of polenListControl.value">
+        <mat-form-field appearance="fill">
+            <mat-label>{{polen.Polen_Type_Name}} percentage</mat-label>
+            <input matInput type="number" placeholder="Ex. 13" [(ngModel)]="polenTypeValues[polen.PolenId]">
+            <span class="percentage" matSuffix>%</span>
+        </mat-form-field>
+        <br>
+    </span>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="addRange()"
+        [disabled]="AnyDateIsNull() || !AllPercentagesSum100() || AnyInvalidField() || clicked">Add</button>
+</mat-dialog-actions>

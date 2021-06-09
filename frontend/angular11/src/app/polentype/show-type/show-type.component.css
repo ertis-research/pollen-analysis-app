@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-elevation-z8 {    
+    overflow-x: auto;
+  }
+
+.whitespace {
+    margin-left: 10px;
+}
+
+.percentage {
+    margin-left: 10px;
+    color: grey;
+}

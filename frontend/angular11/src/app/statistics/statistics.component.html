@@ -1,0 +1,25 @@
+<h1 class="mat-h2" align="center">Mean of particles per month</h1>
+<div #containerRef align="center">
+    <ngx-charts-bar-vertical [view]="[containerRef.offsetWidth,400]" [results]="analysisData"
+        [xAxisLabel]="'Last 6 Month Data'" [yAxisLabel]="'Number of polen particles'" [legend]="false"
+        [showXAxisLabel]="true" [showYAxisLabel]="true" [scheme]="colorSchemeBarPlot" [xAxis]="true" [yAxis]="true">
+    </ngx-charts-bar-vertical>
+</div>
+<br><br>
+<h1 class="mat-h2" align="center">Estimation of the number of different particles per day</h1>
+<div #containerRef align="center">
+    <form [formGroup]="dateFormGroup">
+        <mat-form-field appearance="fill">
+            <mat-label>Select date to inspect</mat-label>
+            <input matInput [matDatepicker]="dp3" (dateChange)="onChange()" formControlName="dateCtrl">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </form>
+    <ngx-charts-pie-chart [view]="[containerRef.offsetWidth, 600]" [scheme]="getColorPalette()" [results]="pieChartData"
+        [legend]="true" [legendPosition]="'right'" [labels]="true" [doughnut]="true" *ngIf="graphActive">
+    </ngx-charts-pie-chart>
+    <h3 class="mat-h2" align="center" *ngIf="alertActive">{{alert}}</h3>
+</div>
+<br><br>
+<br><br>

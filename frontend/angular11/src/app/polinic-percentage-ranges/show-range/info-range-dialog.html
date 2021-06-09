@@ -1,0 +1,28 @@
+
+<h2 mat-dialog-title>Information of this pollinic range</h2>
+<mat-dialog-content class="mat-typography">
+    <h4>Dates affected by the pollinic range</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>{{DateOfStart}} – {{DateOfEnd}}</mat-label>
+        <mat-date-range-input disabled>
+            <input matStartDate>
+            <input matEndDate>
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>
+        <mat-date-range-picker disabled></mat-date-range-picker>
+    </mat-form-field>
+    <br>
+    <h4>Percentage for each type of pollen</h4>
+    <span *ngFor="let polen of RangeInfo">
+        <mat-form-field appearance="fill">
+            <mat-label>{{polen.name}} percentage</mat-label>
+            <input matInput type="number" value="{{polen.value}}" disabled>
+            <span class="percentage" matSuffix>%</span>
+        </mat-form-field>
+        <br>
+    </span>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="closeDialog()" cdkFocusInitial>Close</button>
+</div>

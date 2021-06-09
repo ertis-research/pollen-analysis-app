@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Add new type of pollen</h2>
+<mat-dialog-content class="mat-typography">
+    <h4>Enter the name of the pollen</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Pollen name</mat-label>
+        <input matInput type="text" placeholder="Olive" [(ngModel)]="PolenName">
+    </mat-form-field>
+    <br>
+    <h4>Enter the pollen's biological name</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Biological pollen name</mat-label>
+        <input matInput type="text" placeholder="Olea" [(ngModel)]="PolenBioName">
+    </mat-form-field>
+    <br>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="addType()"
+        [disabled]="AnyInvalidField() || clicked">Add</button>
+</mat-dialog-actions>
