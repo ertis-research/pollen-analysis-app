@@ -16,6 +16,7 @@
             <mat-datepicker #dp3 disabled="false"></mat-datepicker>
         </mat-form-field>
     </form>
+    <h3 *ngIf="graphActive">Pollen particles for that day: {{dayData}}</h3>
     <ngx-charts-pie-chart [view]="[containerRef.offsetWidth, 600]" [scheme]="getColorPalette()" [results]="pieChartData"
         [legend]="true" [legendPosition]="'right'" [labels]="true" [doughnut]="true" *ngIf="graphActive">
     </ngx-charts-pie-chart>

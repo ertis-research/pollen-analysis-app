@@ -46,6 +46,7 @@ export class StatisticsComponent implements OnInit {
   };
 
   dateFormGroup: FormGroup;
+  dayData: any;
   pieChartData: any[];
   graphActive: boolean;
   alert: string;
@@ -63,12 +64,14 @@ export class StatisticsComponent implements OnInit {
         this.alert = data.toString();
         this.alertActive = true;
         this.graphActive = false;
+        this.dayData = null;
         this.pieChartData = [];
       } else {
         this.alert = "";
         this.alertActive = false;
         this.graphActive = true;
-        this.pieChartData = data;
+        this.dayData = data[0]
+        this.pieChartData = data[1];
       }
     })
   }

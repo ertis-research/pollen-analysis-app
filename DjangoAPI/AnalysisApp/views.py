@@ -290,7 +290,8 @@ def getDistrValues(request):
     percentageId = PolinicRanges.objects.raw(getRangeQuery)
     if len(percentageId) < 1:
         return JsonResponse("Failed: No percentages found for this data and date", safe=False)
-    retList = []
+
+    graphData = []
     
     getPolenValuesQuery =  ("SELECT 0 as RangeId, pt.Polen_Type_Name name, pp.Percentage value "
                             "from AnalysisApp_polinicranges pr, AnalysisApp_polentype pt, AnalysisApp_polenpercentage pp "
@@ -302,7 +303,14 @@ def getDistrValues(request):
         dataIter = OrderedDict()
         dataIter['name'] = pr.name
         dataIter['value'] = dateData * pr.value / 100
-        retList.append(dataIter)
+        graphData.append(dataIter)
+
+
+    retList = [dateData, graphData]
+    
+    print(graphData)
+    print()
+    print(retList)
 
     return JsonResponse(retList, safe=False)
     
